@@ -7,9 +7,10 @@ const Footer = () => {
         <div className="row g-5 mb-5">
           <div className="col-lg-4">
             <div className="mb-4 footer-logo-wrap">
-              <a href="#" className="footer-logo">
-                MadeImported<span>.</span>
-              </a>
+            <h1 style={{ color: '#9d003a' }}>
+              MadeImported<span className="d-block"></span>
+            </h1>
+              
             </div>
            
 

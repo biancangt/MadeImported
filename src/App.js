@@ -11,7 +11,7 @@ import Login from "./Pages/Login"; // Importa a página de Login
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "./bootstrap.min.css";
 import "./scss/style.scss";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 
 // --- Função para verificar autenticação ---
