@@ -949,9 +949,22 @@ $pink: #9d003a;
 	}
   }
 
+
   
   @media (max-width: 767px) {
 	.why-choose-section {
 	  padding-top: 10px!important; 
 	}
   }
+
+  @media (max-width: 767px) {
+	.product-section,
+	.product-section .container,
+	.product-section .row,
+	.product-section .col-12 {
+	  padding-bottom: 0 !important;
+	  margin-bottom: 0 !important;
+	  gap: 0 !important;
+	}
+  }
+  
