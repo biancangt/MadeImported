@@ -1,0 +1,49 @@
+{
+    "products": [
+      {
+        "produto": "Armani Code",
+        "marca": "Giorgio Armani",
+        "preco": 605.00,
+        "imagem": "/images/product-1.png"
+      },
+      {
+        "produto": "One Million",
+        "marca": "Paco Rabanne",
+        "preco": 585.00,
+        "imagem": "/images/product-2.png"
+      },
+      {
+        "produto": "Le Male",
+        "marca": "Jean Paul Gaultier",
+        "preco": 590.00,
+        "imagem": "/images/product-3.png"
+      }
+    ],
+    "testimonials": [
+      {
+        "description": "O atendimento foi impecável, me ajudaram a escolher o perfume perfeito com muita paciência.",
+        "author_name": "Ana Souza"
+      },
+      {
+        "description": "Confio totalmente na loja, os produtos são originais e o serviço é rápido e seguro.",
+        "author_name": "Carlos Eduardo"
+      },
+      {
+        "description": "Equipe super atenciosa e dedicada. Me senti muito bem acolhida durante toda a compra.",
+        "author_name": "Mariana Lima"
+      },
+      {
+        "description": "Profissionais confiáveis que entregam exatamente o que prometem. Recomendo muito!",
+        "author_name": "João Pedro"
+      },
+      {
+        "description": "Adorei a experiência de compra, atendimento personalizado e perfumes autênticos.",
+        "author_name": "Patrícia Fernandes"
+      },
+      {
+        "description": "Sempre que compro aqui sei que vou receber um produto de qualidade com total segurança.",
+        "author_name": "Lucas Martins"
+      }
+    ]
+  }
+  
