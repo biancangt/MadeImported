@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+exec\ -I/
+
+# Ignore README.md file
+README.md
