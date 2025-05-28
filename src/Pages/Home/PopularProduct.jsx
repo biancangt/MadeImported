@@ -10,7 +10,9 @@ function ProductSection() {
 
             {/* Coluna 1 - Texto */}
             <div className="col-md-12 col-lg-3 mb-5 mb-lg-0 product-text">
-              <h2 className="mb-4 section-title">Descubra perfumes exclusivos.</h2>
+              <h2 className="mb-4 section-title section-title-responsive">
+                Descubra perfumes exclusivos.
+              </h2>
               <p className="mb-4">
                 Encontre fragrâncias únicas que despertam emoções e refletem sua essência. Perfumes sofisticados para todos os estilos.
               </p>

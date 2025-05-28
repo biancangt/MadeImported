@@ -931,3 +931,14 @@ $pink: #9d003a;
 	margin: 0;
   }
   
+ 
+  .section-title-responsive {
+	text-align: left!important;
+  }
+  
+  @media (max-width: 767px) {
+	.section-title-responsive {
+	  text-align: center!important;
+	}
+  }
+  

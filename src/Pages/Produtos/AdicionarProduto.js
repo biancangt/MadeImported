@@ -4,9 +4,8 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../../firebase";
 
 const AdicionarProduto = () => {
-  // Estado para vários produtos que o usuário está adicionando
   const [produtosParaAdicionar, setProdutosParaAdicionar] = useState([
-    { nome: "", marca: "", tamanho: "", preco: "" },
+    { nome: "", marca: "", tamanho: "", preco: "", imagem: "" },
   ]);
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,25 +46,22 @@ const AdicionarProduto = () => {
     loadProdutos();
   }, []);
 
-  // Atualiza um campo de um produto na lista de produtos para adicionar
   const handleInputChange = (index, field, value) => {
     const newProdutos = [...produtosParaAdicionar];
     newProdutos[index][field] = value;
     setProdutosParaAdicionar(newProdutos);
   };
 
-  // Adiciona uma nova linha para inserir produto
   const handleAddProductField = () => {
     setProdutosParaAdicionar([
       ...produtosParaAdicionar,
-      { nome: "", marca: "", tamanho: "", preco: "" },
+      { nome: "", marca: "", tamanho: "", preco: "", imagem: "" },
     ]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar: pelo menos nome e preço devem existir para cada produto válido
     for (const p of produtosParaAdicionar) {
       if (!p.nome || !p.preco) {
         alert("Todos os produtos devem ter nome e preço!");
@@ -74,18 +70,18 @@ const AdicionarProduto = () => {
     }
 
     try {
-      // Envia todos os produtos em sequência
       for (const p of produtosParaAdicionar) {
         await addDoc(collection(db, "produtos"), {
           nome: p.nome,
           marca: p.marca,
           tamanho: p.tamanho,
           preco: parseFloat(p.preco),
+          imagem: p.imagem,
         });
       }
 
       alert("Produtos adicionados com sucesso!");
-      setProdutosParaAdicionar([{ nome: "", marca: "", tamanho: "", preco: "" }]);
+      setProdutosParaAdicionar([{ nome: "", marca: "", tamanho: "", preco: "", imagem: "" }]);
       loadProdutos();
     } catch (error) {
       console.error("Erro ao adicionar produtos:", error);
@@ -173,6 +169,17 @@ const AdicionarProduto = () => {
                 step="0.01"
               />
             </div>
+
+            <div className="mb-3">
+              <label>Imagem (URL)</label>
+              <input
+                type="text"
+                className="form-control"
+                value={produto.imagem}
+                onChange={(e) => handleInputChange(index, "imagem", e.target.value)}
+                placeholder="Link da imagem (opcional)"
+              />
+            </div>
           </div>
         ))}
 
@@ -208,7 +215,14 @@ const AdicionarProduto = () => {
               <div>
                 <strong>{produto.nome}</strong> - R$ {produto.preco} <br />
                 <small>Marca: {produto.marca || "-"}</small> <br />
-                <small>Tamanho: {produto.tamanho || "-"}</small>
+                <small>Tamanho: {produto.tamanho || "-"}</small> <br />
+                {produto.imagem && (
+                  <img
+                    src={produto.imagem}
+                    alt={produto.nome}
+                    style={{ width: "100px", height: "100px", objectFit: "cover", marginTop: "5px" }}
+                  />
+                )}
               </div>
               <button
                 className="btn btn-danger btn-sm"

@@ -13,7 +13,9 @@ function WhyChooseUs() {
       <div className="container">
         <div className="row justify-content-between">
           <div className="col-lg-6">
-            <h2 className="section-title">Por que escolher nossa loja de perfumes?</h2>
+            <h2 className="section-title section-title-responsive">
+              Por que escolher nossa loja de perfumes?
+            </h2>
             <p>
               Descubra uma seleção exclusiva dos melhores perfumes, com o melhor preço do mercado.
             </p>

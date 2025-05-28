@@ -9,27 +9,21 @@ const NossosProdutos = () => {
   const [filtroMarca, setFiltroMarca] = useState("");
   const [ordenar, setOrdenar] = useState("");
 
-  // Carregar produtos
   useEffect(() => {
     async function loadProdutos() {
       const dados = await buscarProdutos();
-
-      // Ordenar por marca ao carregar
       const ordenadosPorMarca = dados.sort((a, b) => {
         const marcaA = a.marca ? a.marca.toLowerCase() : "";
         const marcaB = b.marca ? b.marca.toLowerCase() : "";
         return marcaA.localeCompare(marcaB);
       });
-
       setProdutos(ordenadosPorMarca);
     }
     loadProdutos();
   }, []);
 
-  // Gerar lista de marcas únicas
   const marcas = Array.from(new Set(produtos.map((p) => p.marca).filter(Boolean)));
 
-  // Aplicar filtros e ordenação
   const produtosFiltrados = produtos
     .filter((produto) => {
       const busca = filtro.toLowerCase();
@@ -38,35 +32,74 @@ const NossosProdutos = () => {
         (produto.marca && produto.marca.toLowerCase().includes(busca))
       );
     })
-    .filter((produto) =>
-      filtroMarca ? produto.marca === filtroMarca : true
-    )
+    .filter((produto) => (filtroMarca ? produto.marca === filtroMarca : true))
     .sort((a, b) => {
-      if (ordenar === "menor") {
-        return a.preco - b.preco;
-      } else if (ordenar === "maior") {
-        return b.preco - a.preco;
-      } else {
-        return 0; // Se não for para ordenar por preço, mantém a ordem alfabética de marca
-      }
+      if (ordenar === "menor") return a.preco - b.preco;
+      if (ordenar === "maior") return b.preco - a.preco;
+      return 0;
     });
 
   return (
     <>
-      <section className="titulo-produtos" style={{ backgroundColor: "#e0f7fa" }}>
+      <style>{`
+        .produtos-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 20px;
+          justify-items: center;
+          margin-top: 20px;
+        }
+
+        .produto-item {
+          text-align: center;
+        }
+
+        .produto-item img,
+        .produto-item .sem-imagem {
+          width: 100%;
+          height: 180px;
+          object-fit: contain;
+          background: #f9f9f9;
+        }
+
+        .produto-item .sem-imagem {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #666;
+          font-size: 14px;
+        }
+
+        .produto-info {
+          margin-top: 10px;
+        }
+
+        .produto-info h5 {
+          font-size: 1.1rem;
+          font-weight: bold;
+          margin-bottom: 6px;
+        }
+
+        .produto-info p {
+          margin: 4px 0;
+          font-size: 0.95rem;
+        }
+
+        .produto-info .preco {
+          font-weight: bold;
+          color: #000;
+          margin-top: 6px;
+        }
+      `}</style>
+
+      <section className="titulo-produtos">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-12">
-              <h1 className="titulo-produtos__texto">Nossos Produtos</h1>
-            </div>
-          </div>
+          <h1 className="titulo-produtos__texto">Nossos Produtos</h1>
         </div>
       </section>
 
       <section className="untree_co-section product-section before-footer-section fundo-branco">
         <div className="container">
-
-          {/* Campo de busca e filtros */}
           <div className="row mb-4 align-items-center">
             <div className="col-md-4">
               <div className="input-group">
@@ -111,34 +144,27 @@ const NossosProdutos = () => {
             </div>
           </div>
 
-          {/* Tabela de produtos */}
-          <div className="table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Marca</th>
-                  <th>Nome</th>
-                  <th>Tamanho</th>
-                  <th>Preço</th>
-                </tr>
-              </thead>
-              <tbody>
-                {produtosFiltrados.length === 0 ? (
-                  <tr>
-                    <td colSpan="4">Carregando Produtos...</td>
-                  </tr>
-                ) : (
-                  produtosFiltrados.map((produto) => (
-                    <tr key={produto.id}>
-                      <td>{produto.marca || "-"}</td>
-                      <td>{produto.nome}</td>
-                      <td>{produto.tamanho || "-"}</td>
-                      <td>R$ {produto.preco.toFixed(2)}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+          <div className="produtos-container">
+            {produtosFiltrados.length === 0 ? (
+              <p className="text-center">Carregando Produtos...</p>
+            ) : (
+              produtosFiltrados.map((produto) => (
+                <div key={produto.id} className="produto-item">
+                  {produto.imagem ? (
+                    <img src={produto.imagem} alt={produto.nome} />
+                  ) : (
+                    <div className="sem-imagem">Sem imagem</div>
+                  )}
+
+                  <div className="produto-info">
+                    <h5>{produto.nome}</h5>
+                    <p>Marca: {produto.marca || "-"}</p>
+                    <p>Tamanho: {produto.tamanho || "-"}</p>
+                    <p className="preco">R$ {produto.preco.toFixed(2)}</p>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>
